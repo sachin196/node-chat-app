@@ -12,7 +12,7 @@ var io =socketIO(server);
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
-    console.log('new user connected');
+    console.log('New user connected');
      
     // socket.emit('newEmail', {
     //  from: 'nike@example.com',
@@ -29,21 +29,32 @@ io.on('connection', (socket) => {
     //     text: 'hey, What is going on.',
     //    });
 
-    socket.on('createMessage', (Message) => {
-        console.log('createMessage', Message);
+    socket.emit('newMessage', {
+        from: 'Admin',
+        text: 'Welcome to the chat app',
+        createdAt: new Date().getTime()
+      });
+    
+      socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user joined',
+        createdAt: new Date().getTime()
+      });
+
+
+      socket.on('createMessage', (message) => {
+        console.log('createMessage', message);
         io.emit('newMessage', {
-            from: Message.from,
-            text: Message.text,
-            createdAt: new Date().getTime()
+          from: message.from,
+          text: message.text,
+          createdAt: new Date().getTime()
         });
        });
 
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        console.log('User was disconnected');
     });
 });
-
-
 
 
 server.listen(port, () => {

@@ -23,6 +23,7 @@ var socket = io();
     // });
 
     
-    socket.on('newMessage', function (Message) {
-        console.log('newMessage', Message);
-    });
+    socket.on('newMessage', function (message) {
+        console.log('newMessage', message);
+      });
+      
