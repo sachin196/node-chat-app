@@ -8,10 +8,10 @@ var socket = io();
         //     text: 'hey,this is andrew.'
         // });
 
-        socket.emit('createMessage', {
-            to: 'jen',
-            text: 'hey,this is andrew2.'
-        });
+        // socket.emit('createMessage', {
+        //     to: 'jen',
+        //     text: 'hey,this is andrew2.'
+        // });
     });
 
     socket.on('disconnect', function() {
@@ -24,5 +24,5 @@ var socket = io();
 
     
     socket.on('newMessage', function (Message) {
-        console.log('new Message', Message);
+        console.log('newMessage', Message);
     });
