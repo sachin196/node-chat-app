@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
     //     from: 'nike',
     //     text: 'hey, What is going on.',
     //    });
-
+  
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the Chat app.'));
     // socket.emit('newMessage', {
     //     from: 'Admin',
@@ -45,9 +45,11 @@ io.on('connection', (socket) => {
     //   });
 
 
-      socket.on('createMessage', (message) => {
+      socket.on('createMessage', (message, callback) => {
         console.log('createMessage', message);
+        // return false;
         io.emit('newMessage', generateMessage(message.from, message.text));
+        callback('This Is From The Server');
         // io.emit('newMessage', {
         //   from: message.from,
         //   text: message.text,
