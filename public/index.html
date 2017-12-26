@@ -3,7 +3,7 @@
     <head>
         <meta  charset="utf-8">
         <title>Join | ChatApp</title>
-        <meta name="viewport" content="witdth=device-width, intial-width=1, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-width=1, user-scalable=no">
         <link rel="stylesheet" href="/css/style.css">
         <!-- <script>
           function myFunction() {
@@ -14,7 +14,7 @@
     </head>
     <body class="centered-form">
         <div class="centered-form__form">
-        <form action="/chat.html">
+        <form action="/chat.html">  
             <div class="form-field">
                 <h3>Join a Chat</h3>
             </div>
@@ -24,13 +24,22 @@
             </div>
             <div class="form-field" >
                 <label>Room name</label>
-                <input type="text" name="room" />
+                 <input type="text" name="room" />
             </div>
+            <div>
+                    <label>Active Rooms</label>
+              <div class="form-field" id="room"  ></div>
+             </div>
             <div class="form-field">
-            <button onclick="myFunction()">Join</button>
+            <button>Join</button>
             </div>
         </form>
         </div>
-
+        <script src="/js/libs/jquery-3.2.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/libs/moment.js"></script>
+        <script src="/js/libs/mustache.js"></script>
+        <script src="/js/libs/deparam.js"></script>
+        <script src="/js/index.js"></script>
     </body>
 </html>

@@ -43,6 +43,11 @@ var socket = io();
         // });
     });
 
+    // socket.on('connect', function() {
+    //     // Connected, let's sign-up for to receive messages for this room
+    //     socket.emit('room', room);
+    //  });
+
     socket.on('disconnect', function() {
         console.log('disconnected from server');
     });

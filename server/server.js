@@ -2,6 +2,9 @@ const path = require('path');
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
+// const bodyParser =require('body-parser');
+// const {mongoose} =require('./db/mongoose');
+// const {user} = require('./models/collection-user');
 
 const{generateMessage, generateLocationMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation.js');
@@ -12,7 +15,7 @@ var app = express();
 var server = http.createServer(app);
 var io =socketIO(server);
 var users = new Users();
-app.use(require('express-uncapitalize')());
+// app.use(require('express-uncapitalize')());
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
@@ -46,14 +49,24 @@ io.on('connection', (socket) => {
     //     text: 'New user joined',
     //     createdAt: new Date().getTime()
     //   });
+   
 
-          
+   
+    io.emit('getallRoomList', users.getallRoomList());
      socket.on('join',(params, callback) => {
-     if(!isRealString(params.name) || !isRealString(params.room)) {
-        return callback('Name and Room name are required.');
+     if(!isRealString(params.name)|| !isRealString(params.room)) {
+        return callback('Name are required.');
      }
 
-     socket.join(params.room);
+    //  io.sockets.on('connection', function(socket) {
+    //     // once a client has connected, we expect to get a ping from them saying what room they want to join
+    //     socket.on('room', function(room) {
+    //         socket.join(room);
+    //     });
+    // });
+
+     socket.join(params.room.toLowerCase());
+     console.log(params.room);
      users.removeUser(socket.id);
      users.addUser(socket.id, params.name, params.room);
 
@@ -66,7 +79,7 @@ io.on('connection', (socket) => {
           var user = users.getUser(socket.id);
 
           if(user && isRealString(message.text)) {
-            io.to(user.room.toLowerCase()).emit('newMessage', generateMessage(user.name, message.text));
+            io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
           }
         // console.log('createMessage', message);
         // return false;
@@ -91,6 +104,7 @@ io.on('connection', (socket) => {
         var user = users.removeUser(socket.id);
 
         if(user) {
+            io.emit('getallRoomList', users.getallRoomList());
             io.to(user.room).emit('updateUserList', users.getUserList(user.room));
             io.to(user.room).emit('newMessage',generateMessage('Admin', `${user.name} has left.`));
         }
