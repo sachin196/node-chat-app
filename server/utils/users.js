@@ -7,11 +7,36 @@ class Users {
     //     console.log("property", Users(property));
     // }
     }
+
     addUser(id, name, room) {
-        room = room.toLowerCase();
+        room =room.toLowerCase();
         var user = {id, name, room};
+        console.log(user);
+        console.log(this.users);
+        // this.users.push(user);
+    //  console.log(user);
+    if(this.users.length==0)
+    {
         this.users.push(user);
+    }
+    else{
+        for(var i in this.users)
+        {
+            if(this.users[i].name == user.name)
+            {
+                return false;
+            }
+            else{
+               this.users.push(user);
+            }
+        }
+    }
     
+    //        if(this.users.filter((user) => user.name != name)) {
+           
+    //    }
+
+
         if(this.rooms.indexOf(room) < 0){
             this.rooms.push(room);
         }
@@ -19,8 +44,7 @@ class Users {
         // console.log(room);
         // console.log(user);
         // JSON.stringify(user);
-        console.log(this.rooms);
-        // console.log(this.users);
+      
         return user;
        return room;
         
@@ -40,9 +64,9 @@ class Users {
     getUserList (room){
         
         console.log('get user list by room '+room)
-        var user = this.users.filter((user) => user.room === room);
+        var user = this.users.filter((user) => user.room === room.toLowerCase());
         var namesArray = user.map((user) => user.name);
-        console.log(namesArray)
+        // console.log(namesArray)
         return namesArray;
     }
     // getRoomList (room){

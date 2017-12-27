@@ -1,3 +1,4 @@
+// Import all our dependencies
 const path = require('path');
 const express = require('express');
 const http = require('http');
@@ -16,7 +17,10 @@ var server = http.createServer(app);
 var io =socketIO(server);
 var users = new Users();
 // app.use(require('express-uncapitalize')());
+
+// tell express where to serve static files from
 app.use(express.static(publicPath));
+// mongoose.connect("mongodb://127.0.0.1:27017/ChatApp");
 
 io.on('connection', (socket) => {
     console.log('New user connected');
@@ -54,8 +58,11 @@ io.on('connection', (socket) => {
    
     io.emit('getallRoomList', users.getallRoomList());
      socket.on('join',(params, callback) => {
-     if(!isRealString(params.name)|| !isRealString(params.room)) {
-        return callback('Name are required.');
+     if(!isRealString(params.name) || !isRealString(params.room)) {
+        return callback('Name and Room are required');
+     }
+     if(users.addUser(socket.id, params.name, params.room) == false ) {
+        return callback('Username Already exists');
      }
 
     //  io.sockets.on('connection', function(socket) {
@@ -64,17 +71,17 @@ io.on('connection', (socket) => {
     //         socket.join(room);
     //     });
     // });
-
      socket.join(params.room.toLowerCase());
      console.log(params.room);
      users.removeUser(socket.id);
      users.addUser(socket.id, params.name, params.room);
 
-     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+     io.to(params.room.toLowerCase()).emit('updateUserList', users.getUserList(params.room));
      socket.emit('newMessage', generateMessage('Admin', 'Welcome to the Chat app.'));
-     socket.broadcast.to(params.room).emit('newMessage',generateMessage('Admin', `${params.name} has joined`));
+     socket.broadcast.to(params.room.toLowerCase()).emit('newMessage',generateMessage('Admin', `${params.name} has joined`));
      callback();
      });
+    
       socket.on('createMessage', (message, callback) => {
           var user = users.getUser(socket.id);
 
@@ -110,7 +117,6 @@ io.on('connection', (socket) => {
         }
     });
 });
-
 
 server.listen(port, () => {
     console.log(`server is up on ${port}`)
