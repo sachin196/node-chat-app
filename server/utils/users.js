@@ -1,4 +1,3 @@
-
 class Users {
     constructor () {
      this.users =[];
@@ -11,7 +10,7 @@ class Users {
     addUser(id, name, room) {
         room =room.toLowerCase();
         var user = {id, name, room};
-        console.log(user);
+        console.log('this is the user',user);
         console.log(this.users);
         // this.users.push(user);
     //  console.log(user);
@@ -20,22 +19,26 @@ class Users {
         this.users.push(user);
     }
     else{
-        for(var i in this.users)
+        console.log('here......')
+        var con=this.users.filter((user)=>{
+            var data=user.name === name;
+            console.log(user);
+            console.log(name);
+            console.log(data);
+           return data;
+        });
+        console.log(con);
+        console.log('con');
+        if(con.length == 0)
         {
-            if(this.users[i].name == user.name)
-            {
-                return false;
-            }
-            else{
-               this.users.push(user);
-            }
+            this.users.push(user);
+        } else
+        {
+            return false;
         }
     }
     
-    //        if(this.users.filter((user) => user.name != name)) {
-           
-    //    }
-
+    
 
         if(this.rooms.indexOf(room) < 0){
             this.rooms.push(room);
@@ -44,11 +47,12 @@ class Users {
         // console.log(room);
         // console.log(user);
         // JSON.stringify(user);
-      
+        console.log(this.users);
         return user;
        return room;
         
     }
+
   
     removeUser(id){
       var user = this.getUser(id);

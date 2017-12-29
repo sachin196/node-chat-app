@@ -4,9 +4,83 @@
     <meta charset="utf-8">
     <title>Join | ChatApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <link rel="stylesheet" href="/css/style1.css">
+    <style>
+    @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+   body {
+        width: 100%;
+        height: 100%;
+    }
+}
+    </style>
 </head>
+<body >
 
+     <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div id="users"></div>
+       </div>
+<div class="">
+        <span style="font-size:30px;cursor:pointer;color:aliceblue" onclick="openNav()">&#9776; People</span>
+
+        <div class="chat__main">
+                <ol id="messages" class="chat__messages time-left"></ol>
+            
+            <div class="chat__footer">
+            <form id="message-form">
+                <input type="text" name="message" placeholder="Message" autofocus autocomplete="off"/>
+                <button>send</button>
+            </form>
+            <button id="send-location">send Location</button>
+            </div>
+            </div>
+            
+            <script id="message-template" type="text/template">
+            <li class="message">
+                <div class="message__title">
+                <h4>{{from}}</h4>
+                <span>{{createdAt}}</span>
+                </div>
+                <div  class="message__body">
+                <p>{{text}}</p>
+                </div>
+            </li>
+            </script>
+            
+            <script id="location-message-template" type="text/template">
+                <li class="message">
+                    <div class="message__title">
+                    <h4>{{from}}</h4>
+                    <span>{{createdAt}}</span>
+                    </div>
+                    <div  class="message__body">
+                    <p>
+                     <a href="{{url}}" target="_blank">My current location</a>   
+                    </p>    
+                    </div>
+                </li>
+                </script>
+ </div>
+ <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
+</body>
+
+
+
+
+
+
+
+<!-- 
 <body class="chat">
 <div class="chat__sidebar">
 <h3>People</h3>
@@ -14,7 +88,7 @@
 </div>
 
 <div class="chat__main">
-    <ol id="messages" class="chat__messages"></ol>
+    <ol id="messages" class="chat__messages time-left"></ol>
 
 <div class="chat__footer">
 <form id="message-form">
@@ -49,7 +123,7 @@
         </p>    
         </div>
     </li>
-    </script>
+    </script> -->
 
 <script src="/js/libs/jquery-3.2.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>

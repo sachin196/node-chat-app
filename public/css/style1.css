@@ -1,9 +1,47 @@
+
+body  {
+    background-image: url("background2.jpg");
+    /* background-color: #cccccc; */
+    
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    /* background-color: rgb(101, 184, 223); */
+    background-image: url("background2.jpg");
+    opacity: 0.7;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+
+}
+
 button,button:hover{
     border:none;
     color:#fff;
     padding:10px
 }
-.chat__messages,.chat__sidebar ul{
+.chat__messages, ul{
     list-style-type:none}*{box-sizing:border-box;
         margin:0;
         padding:0;
@@ -64,16 +102,16 @@ button:disabled{
     background:-o-linear-gradient(125deg,rgba(39,107,130,1) 0,rgba(49,84,129,1) 100%);
     background:-ms-linear-gradient(125deg,rgba(39,107,130,1) 0,rgba(49,84,129,1) 100%);
     background:linear-gradient(325deg,rgba(39,107,130,1) 0,rgb(9, 22, 39) 100%)}
-    .chat__footer,.chat__sidebar li{
+    .chat__footer, li{
         background:#e6eaee;
         padding:10px
     }
-    .chat__sidebar h3{
+     h3{
         color:#e6eaee;
         margin:10px 20px;
         text-align:left
     }
-    .chat__sidebar li{
+     li{
         border:1px solid #e1e1e1;
         border-radius:5px;
         margin:10px
@@ -95,6 +133,7 @@ button:disabled{
     color: rgb(19, 18, 18);
 }
 .chat__footer{
+    position: sticky;
     display:flex;
     flex-shrink:0}
 .chat__footer form{
@@ -121,6 +160,8 @@ button:disabled{
         .chat__footer{flex-direction:column}
         .chat__footer form{margin-bottom:10px}
         .chat__footer button{margin-right:0}}
+     
+     
         #mySidenav a {
             position: absolute;
             left: -80px;
