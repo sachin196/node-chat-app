@@ -14,7 +14,6 @@ var socket = io();
         messages.scrollTop(scrollHeight);
     }
     }
-
     socket.on('connect', function(){
     var params = jQuery.deparam(window.location.search);
 
@@ -27,8 +26,7 @@ var socket = io();
      }
     });
     });
-
-           
+        
     socket.on('connect',function () {
         console.log('connected to server');
 
