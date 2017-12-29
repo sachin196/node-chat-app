@@ -6,11 +6,22 @@ body  {
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
+}ul {
+    /* Text color */
+    list-style-type: disc;
+     font-size: 50%; 
+     line-height: 2;
+    color: black;
+}
+
+li span{
+    font-size:100%; vertical-align: middle;
+    padding-right: 0.5em;
 }
 .sidenav {
     height: 100%;
     width: 0;
-    position: fixed;
+    position: absolute;;
     z-index: 1;
     top: 0;
     right: 0;
@@ -23,13 +34,20 @@ body  {
 }
 
 .sidenav .closebtn {
-    position: absolute;
+    position: relative;
     top: 0;
     right: 25px;
     font-size: 36px;
-    margin-left: 50px;
+    margin-left: 270px;
 }
-
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #0f0f0f;
+    display: block;
+    transition: 0.3s;
+}
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -163,7 +181,7 @@ button:disabled{
      
      
         #mySidenav a {
-            position: absolute;
+            position: relative;
             left: -80px;
             transition: 0.3s;
             padding: 15px;
@@ -173,7 +191,7 @@ button:disabled{
             color: white;
             border-radius: 0 5px 5px 0;
         }
-        
+/*         
         #mySidenav a:hover {
             left: 0;
-        }
+        } */
